@@ -4,23 +4,29 @@
 {
     //Required. Inputs the module expects.
     "inputs": [
-        //e.g.
-        /*
         {
-            "id": "from",
-            "title":"From"
+            "id": "fileId",
+            "title":"Id file"
+        },
+        {
+            "id": "emailAddress",
+            "title":"Email Address"
         }
-        */
     ],
     //Required. Outputs the module emits.
     "outputs": [
-      //e.g.
-      /*
         {
-            "id": "from",
-            "title":"From"
+            "id": "id",
+            "title":"ID"
+        },
+        {
+            "id": "name",
+            "title":"Name"
+        },
+        {
+            "id": "emailAddress",
+            "title":"Email Address"
         }
-      */
     ],
-    "title": "Google Sheets Add Viewer" /* Required.A display name for the module */
+    "title": "Google Sheets Add Editor" /* Required.A display name for the module */
 }
