@@ -25,5 +25,5 @@
         }
     ],
     "icon": "google",
-    "title": "Google Sheets Add Editor" /* Required.A display name for the module */
+    "title": "Google Sheets Add Viewer" /* Required.A display name for the module */
 }
