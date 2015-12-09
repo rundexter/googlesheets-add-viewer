@@ -5,10 +5,6 @@
     //Required. Inputs the module expects.
     "inputs": [
         {
-            "id": "fileId",
-            "title":"Id file"
-        },
-        {
             "id": "emailAddress",
             "title":"Email Address"
         }
@@ -28,5 +24,6 @@
             "title":"Email Address"
         }
     ],
+    "icon": "google",
     "title": "Google Sheets Add Editor" /* Required.A display name for the module */
 }

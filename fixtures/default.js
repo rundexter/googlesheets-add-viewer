@@ -63,8 +63,7 @@ module.exports = _.merge({
              */
             input: {
                 //Replace VAR1 with the name of an expected input, and add more inputs as needed.
-                fileId: '1bNyaBuxFpOrZzdRn29nglaL6UfUYMi85X1yQjykSNqk',
-                emailAddress: ['al.zaretskii@gmail.com', 'alexander.zaretskii@gmail.com']
+                emailAddress: ['al.zaretskii@gmail.com', 'alexander.zaretskii@gmail.com', 'servise-name@forward-vector-108415.iam.gserviceaccount.com']
             }
         }
     }

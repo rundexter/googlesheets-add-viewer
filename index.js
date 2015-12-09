@@ -14,14 +14,14 @@ var resource = {
 module.exports = {
     checkAuthOptions: function (step, dexter) {
 
-        if(!step.input('fileId').first() || _.isEmpty(step.input('emailAddress').first())) {
+        if(_.isEmpty(step.input('emailAddress').first())) {
 
             this.fail('A [name, emailAddress] inputs variable is required for this module');
         }
 
-        if(!dexter.environment('google_access_token')) {
+        if(!dexter.environment('google_access_token') || !dexter.environment('google_spreadsheet')) {
 
-            this.fail('A google_access_token environment variable is required for this module');
+            this.fail('A [google_access_token, google_spreadsheet] environment variable is required for this module');
         }
     },
 
@@ -75,7 +75,7 @@ module.exports = {
         oauth2Client.setCredentials({access_token: dexter.environment('google_access_token'), refresh_token: dexter.environment('google_refresh_token')});
         google.options({ auth: oauth2Client });
         // recursive send access
-        this.sendMails(step.input('fileId').first(), step.input('emailAddress').toArray(), function (err, data) {
+        this.sendMails(dexter.environment('google_spreadsheet'), step.input('emailAddress').toArray(), function (err, data) {
 
             if (!_.isEmpty(err)) {
 
