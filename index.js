@@ -1,8 +1,6 @@
 var _ = require('lodash'),
-    google = require('googleapis'),
-    OAuth2 = google.auth.OAuth2;
+    google = require('googleapis');
 
-var oauth2Client = new OAuth2();
 var service = google.drive('v2');
 
 var pickData = ['id', 'name', 'emailAddress'];
