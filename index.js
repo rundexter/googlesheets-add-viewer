@@ -14,15 +14,13 @@ var resource = {
 module.exports = {
     checkAuthOptions: function (step, dexter) {
 
-        if(_.isEmpty(step.input('emailAddress').first())) {
+        if(_.isEmpty(step.input('emailAddress').first()))
+            return 'A [name, emailAddress] inputs variable is required for this module';
 
-            this.fail('A [name, emailAddress] inputs variable is required for this module');
-        }
+        if(!dexter.environment('google_spreadsheet'))
+            return 'A [google_spreadsheet] environment variable is required for this module';
 
-        if(!dexter.environment('google_access_token') || !dexter.environment('google_spreadsheet')) {
-
-            this.fail('A [google_access_token, google_spreadsheet] environment variable is required for this module');
-        }
+        return false;
     },
 
     /**
@@ -69,21 +67,23 @@ module.exports = {
      * @param {AppData} dexter Container for all data used in this workflow.
      */
     run: function(step, dexter) {
+        var OAuth2 = google.auth.OAuth2,
+            oauth2Client = new OAuth2(),
+            credentials = dexter.provider('google').credentials(),
+            error = this.checkAuthOptions(step, dexter);
 
-        this.checkAuthOptions(step, dexter);
+        if (error)
+            return this.fail(error);
+
         // set credential
-        oauth2Client.setCredentials({access_token: dexter.environment('google_access_token'), refresh_token: dexter.environment('google_refresh_token')});
+        oauth2Client.setCredentials({
+            access_token: _.get(credentials, 'access_token')
+        });
         google.options({ auth: oauth2Client });
         // recursive send access
         this.sendMails(dexter.environment('google_spreadsheet'), step.input('emailAddress').toArray(), function (err, data) {
 
-            if (!_.isEmpty(err)) {
-
-                this.fail(err);
-            } else {
-
-                this.complete(data);
-            }
+            _.isEmpty(err)? this.complete(data) : this.fail(err);
         }.bind(this));
     }
 };
